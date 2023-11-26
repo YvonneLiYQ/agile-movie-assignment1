@@ -86,26 +86,31 @@ describe("Home Page ", () => {
          });
          
        });
-       describe("By movie genre", () => {
-        it("should display movies with the specified genre and title", () => {
-            let searchString = "fr";
-            let matchingTitleMovies = filterByTitle(movies, searchString);
-            const selectedGenreId = 35;
-           const selectedGenreText = "Comedy";
-           const matchingMovies = filterByGenre(matchingTitleMovies, selectedGenreId);
-           cy.get("#filled-search").clear().type(searchString); 
-           cy.get("#genre-select").click();
-           cy.get("li").contains(selectedGenreText).click();
-           cy.get(".MuiCardHeader-content").should(
-             "have.length",
-             matchingMovies.length
-           );
-           cy.get(".MuiCardHeader-content").each(($card, index) => {
-             cy.wrap($card).find("p").contains(matchingMovies[index].title);
-           });
-         });
+       describe("Combined genre and title", () => {
+        it("show movies with the selected genre and movies with 'm' in the title", () => {
+          const searchString = "m";
+          const selectedGenreId = 18;
+          const selectedGenreText = "Drama";
+          const matchingMoviesByTitle = filterByTitle(movies, searchString);
+          const matchingMoviesByGenre = filterByGenre(movies, selectedGenreId);
+          const matchingMovies = matchingMoviesByTitle.filter(movieByTitle => 
+            matchingMoviesByGenre.some(movieByGenre => movieByTitle.id === movieByGenre.id)
+          );
+          cy.get("#filled-search").clear().type(searchString); // Enter m in text box
+          cy.get("#genre-select").click();
+          cy.get("li").contains(selectedGenreText).click();
+          cy.get(".MuiCardHeader-content").should(
+            "have.length",
+            matchingMovies.length
+          );
+          cy.get(".MuiCardHeader-content").each(($card, index) => {
+            cy.wrap($card).find("p").contains(matchingMovies[index].title);
+          });
+        });
+      });
          
-       });
+       
+       
        describe("From the Favorites page", () => {
         it("should Select favourite movie functionality Favourites", () =>{
           cy.get("button[aria-label='add to favorites']").eq(0).click();
@@ -116,6 +121,16 @@ describe("Home Page ", () => {
         });
 
         });
+        describe("From the MustWatch page", () => {
+            it("should Select favourite movie functionality Favourites", () =>{
+              cy.get("button[aria-label='add to MustWatch']").eq(0).click();
+              cy.get("button[aria-label='add to MustWatch']").eq(1).click();
+              cy.get(".MuiCardHeader-avatar");
+              cy.get("header").find(".MuiToolbar-root").find("button").eq(3).click();
+              
+            });
+    
+            });
       
   });
 

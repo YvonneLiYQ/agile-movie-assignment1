@@ -28,18 +28,13 @@ const NowPlayingPage = (props) => {
 
   return (
     <PageTemplate
-      title="Now Playing Movies "
+      title="NowPlaying Movies"
       movies={movies}
       action={(movie) => {
-        return( 
-          
-          <> 
+        return ( <> 
           <AddToMustWatchIcon  movie={movie}  />  
           <AddToFavoritesIcon movie={movie}/>
-          </>
-       
-        
-        )
+          </> )
 
       }}
     />
