@@ -80,35 +80,7 @@ export default function ActorCard({ actor, action }) {
             : img
         }
       />
-      {/* <CardContent>
-        <Grid container>
-          <Grid item xs={6}>
-            <Typography variant="h6" component="p">
-              <CalendarIcon fontSize="small" />
-              {actor.release_date}
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="h6" component="p">
-              <StarRateIcon fontSize="small" />
-              {"  "} {actor.vote_average}{" "}
-            </Typography>
-          </Grid>
-        </Grid>
-      </CardContent> */}
-      {/* <CardActions disableSpacing> */}
-      {/*<IconButton aria-label="add to favorites" onClick={handleAddToFavorite}>
-            <FavoriteIcon color="primary" fontSize="large" />
-      </IconButton>*/}
-      {/* {action(actor)} */}
-{/* 
-        <Link to={`/movies/${actor.id}`}>
-          <Button variant="outlined" size="medium" color="primary">
-            More Info ...
-          </Button>
-        </Link> */}
-
-      {/* </CardActions> */}
+     
     </Card>
   );
 }
